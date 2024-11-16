@@ -28,7 +28,9 @@ func New(overflow int) Cache {
 }
 
 func (c *cache) Set(k, v string) {
+	c.mu.RLock()
 	node, ok := c.hash[k]
+	c.mu.RUnlock()
 	if ok {
 		node.Val = v
 
